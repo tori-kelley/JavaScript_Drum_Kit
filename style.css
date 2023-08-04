@@ -3,20 +3,39 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
-    width: 100vw;
+    width: 98vw;
 }
 
 .keys {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    height: 100vh;
+    height: 70vh;
+    width: 100 vw;
 }
 
 .key {
-    width:80px;
-    height:80px;
+    width:70px;
+    height:70px;
+    border:5px solid purple;
+    background-color: black;
+    color: purple;
+    font-size: 50px;
+    text-align: center;
+    transition: all 0.1s;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.control {
+    width:250px;
     border:5px solid purple;
     background-color: black;
     color: purple;
@@ -26,7 +45,7 @@ body {
 }
 
 .sound {
-    font-size: 25px;
+    font-size: 15px;
     color:mediumorchid;
     text-transform: uppercase;
 }

@@ -43,7 +43,15 @@
         <div data-key="76" class="key">
             <kbd>L</kbd>
             <span class="sound">tom</span>
-        </div>    
+        </div> 
+    </div>
+    <div class="controls" >
+        <div class="control">
+            <p>R (record) </p>
+        </div>
+        <div class="control">
+            <p>U (reset) </p>
+        </div>
     </div>
 
     <audio data-key="65" src="sounds/01 - JavaScript Drum Kit_sounds_boom.wav"></audio>
@@ -59,9 +67,22 @@
     
     <script>
         function keyToSound(e) {
+            if (e.keyCode == "82") {
+                looping = true;
+                return;
+            }
+            else if (e.keyCode == "85") {
+                timeToKeys = {};
+                looping = false;
+                return;
+            }
             const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
             const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-            if (!audio) return; //stops the func if the key pressed has no associated audio
+            if (!audio) return; //stops the func if the key pressed has no associated function
+            if (looping) {
+                let current = (Math.round(Date.now()/50) * 50)%loopPeriod;
+                timeToKeys[current] = [key, audio];
+            }
             playSound(key,audio);
         };
         
@@ -77,11 +98,24 @@
         }
 
         const keys = document.querySelectorAll(".key");
-        // console.log("it's right under here!!")
-        // console.log(keys);
         keys.forEach(key => key.addEventListener("transitionend", removeTransition));
 
         window.addEventListener('keydown', keyToSound);
+
+        let looping = false;
+        let timeToKeys = {}
+        setInterval(playLoop, 10);
+        let loopPeriod = 2000;
+        
+        function playLoop() {
+            let rn = (Math.round(Date.now()/50) * 50)%loopPeriod;
+            if (rn in timeToKeys) {
+                let entry = timeToKeys[rn];
+                rn = null; 
+                playSound(entry[0], entry[1]);
+            }
+            else return;
+        }
     </script>
 </body>
 </html>
