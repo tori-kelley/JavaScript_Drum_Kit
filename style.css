@@ -35,13 +35,11 @@ body {
 }
 
 .control {
-    width:250px;
-    border:5px solid purple;
-    background-color: black;
     color: purple;
-    font-size: 50px;
+    font-size: 20px;
     text-align: center;
     transition: all 0.1s;
+    padding: 20px;
 }
 
 .sound {
